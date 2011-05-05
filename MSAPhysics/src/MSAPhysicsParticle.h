@@ -96,6 +96,11 @@ namespace MSA {
 			ParticleT*		setVelocity(T vel);
 			ParticleT*		addVelocity(T vel);
 			T				getVelocity();
+            
+            // TT //
+            ParticleT*		setColor(int col);
+			int				getColor();
+            
 			
 			// override these functions if you create your own particle type with custom behaviour and/or drawing
 			virtual void	update() {}		// called every frame in world::update();
@@ -129,7 +134,11 @@ namespace MSA {
 			bool			_isDead;
 			bool			_isFixed;
 			bool			_collisionEnabled;
+            
+            // TT //
+            int             _color;
 			
+            
 			void			doVerlet();
 			void			checkWorldEdges();
 			
@@ -264,6 +273,18 @@ namespace MSA {
 		inline T ParticleT<T>::getVelocity() {
 			return _pos - _oldPos;
 		}
+        
+        template <typename T>
+		inline ParticleT<T>* ParticleT<T>::setColor( int col ) {
+            _color = col;
+			return this;
+		}
+		
+        template <typename T>
+		inline int ParticleT<T>::getColor() {
+			return _color;
+		}
+		
 		
 		template <typename T>
 		inline void ParticleT<T>::kill() {
@@ -276,6 +297,9 @@ namespace MSA {
 			return _isDead;
 		}
 		
+
+        
+        
 		template <typename T>
 		ParticleT<T>::ParticleT() {
 			init(T());
