@@ -54,9 +54,6 @@
 
 #elif defined( MSA_HOST_CINDER )
 #include "MSACore-Cinder.h"
-
-#else
-This will give an error. you need to make sure a host is #defined either above, or in project settings
 #endif
 
 #include "MSACoreCommon.h"

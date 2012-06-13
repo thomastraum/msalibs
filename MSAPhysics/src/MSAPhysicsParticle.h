@@ -96,11 +96,6 @@ namespace MSA {
 			ParticleT*		setVelocity(T vel);
 			ParticleT*		addVelocity(T vel);
 			T				getVelocity();
-            
-            // TT //
-            ParticleT*		setColor(int col);
-			int				getColor();
-            
 			
 			// override these functions if you create your own particle type with custom behaviour and/or drawing
 			virtual void	update() {}		// called every frame in world::update();
@@ -134,15 +129,11 @@ namespace MSA {
 			bool			_isDead;
 			bool			_isFixed;
 			bool			_collisionEnabled;
-            
-            // TT //
-            int             _color;
 			
-            
 			void			doVerlet();
-			void			checkWorldEdges();
+			virtual void	checkWorldEdges();
 			
-			virtual void debugDraw();
+			virtual void    debugDraw();
 		};
 		
 		
@@ -273,18 +264,6 @@ namespace MSA {
 		inline T ParticleT<T>::getVelocity() {
 			return _pos - _oldPos;
 		}
-        
-        template <typename T>
-		inline ParticleT<T>* ParticleT<T>::setColor( int col ) {
-            _color = col;
-			return this;
-		}
-		
-        template <typename T>
-		inline int ParticleT<T>::getColor() {
-			return _color;
-		}
-		
 		
 		template <typename T>
 		inline void ParticleT<T>::kill() {
@@ -297,9 +276,6 @@ namespace MSA {
 			return _isDead;
 		}
 		
-
-        
-        
 		template <typename T>
 		ParticleT<T>::ParticleT() {
 			init(T());
@@ -406,6 +382,7 @@ namespace MSA {
 			
 			bool collided = false;
 			T oldVel = getVelocity();
+            // MEMO version
 			for(int i=0; i<T::DIM; i++) {
 				//				r[i] = _radius;
 				
@@ -420,39 +397,39 @@ namespace MSA {
 					collided = true;
 				}
 			}
-			
+            
 			if(collided) collidedWithEdgeOfWorld(getVelocity() - oldVel);
 
 			
-			//			if(_pos.x < _params->worldMin.x + _radius) {
-			//				float vel = _pos.x - _oldPos.x;
-			//				_pos.x = _params->worldMin.x + _radius;
-			//				_oldPos.x = _pos.x + vel * _bounce;
-			//			} else if(_pos.x > _params->worldMax.x - _radius) {
-			//				float vel = _pos.x - _oldPos.x;
-			//				_pos.x = _params->worldMax.x - _radius;
-			//				_oldPos.x = _pos.x + vel * _bounce;
-			//			}
-			//			
-			//			if( _pos.y < _params->worldMin.y + _radius) {
-			//				float vel = _pos.y - _oldPos.y;
-			//				_pos.y = _params->worldMin.y + _radius;
-			//				_oldPos.y = _pos.y + vel * _bounce;
-			//			} else if(_pos.y > _params->worldMax.y - _radius) {
-			//				float vel = _pos.y - _oldPos.y;
-			//				_pos.y = _params->worldMax.y - _radius;
-			//				_oldPos.y = _pos.y + vel * _bounce;
-			//			}
-			//			
-			//			if(_pos.z < _params->worldMin.z + _radius) {
-			//				float vel = _pos.z - _oldPos.z;
-			//				_pos.z = _params->worldMin.z + _radius;
-			//				_oldPos.z = _pos.z + vel * _bounce;
-			//			} else if(_pos.z > _params->worldMax.z - _radius) {
-			//				float vel = _pos.z - _oldPos.z;
-			//				_pos.z = _params->worldMax.z - _radius;
-			//				_oldPos.z = _pos.z + vel * _bounce;
-			//			}
+    //			if(_pos.x < _params->worldMin.x + _radius) {
+    //				float vel = _pos.x - _oldPos.x;
+    //				_pos.x = _params->worldMin.x + _radius;
+    //				_oldPos.x = _pos.x + vel * _bounce;
+    //			} else if(_pos.x > _params->worldMax.x - _radius) {
+    //				float vel = _pos.x - _oldPos.x;
+    //				_pos.x = _params->worldMax.x - _radius;
+    //				_oldPos.x = _pos.x + vel * _bounce;
+    //			}
+    //			
+    //			if( _pos.y < _params->worldMin.y + _radius) {
+    //				float vel = _pos.y - _oldPos.y;
+    //				_pos.y = _params->worldMin.y + _radius;
+    //				_oldPos.y = _pos.y + vel * _bounce;
+    //			} else if(_pos.y > _params->worldMax.y - _radius) {
+    //				float vel = _pos.y - _oldPos.y;
+    //				_pos.y = _params->worldMax.y - _radius;
+    //				_oldPos.y = _pos.y + vel * _bounce;
+    //			}
+    //			
+    //			if(_pos.z < _params->worldMin.z + _radius) {
+    //				float vel = _pos.z - _oldPos.z;
+    //				_pos.z = _params->worldMin.z + _radius;
+    //				_oldPos.z = _pos.z + vel * _bounce;
+    //			} else if(_pos.z > _params->worldMax.z - _radius) {
+    //				float vel = _pos.z - _oldPos.z;
+    //				_pos.z = _params->worldMax.z - _radius;
+    //				_oldPos.z = _pos.z + vel * _bounce;
+    //			}
 		}
 		
 		
