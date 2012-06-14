@@ -537,12 +537,16 @@ namespace MSA {
             // to be able to still delete particles later I only update end if I delete one 
             typename vector<ParticleT<T>*>::iterator end = _particles.end();
             
-			while(it != end) {
-				ParticleT<T>* particle = *it;
+			while( it != end ) {
+//			for ( typename vector<ParticleT<T>*>::iterator it = _particles.begin(); it != _particles.end(); it++) {
+            
+                ParticleT<T>* particle = *it;
 				if(particle->_isDead) {							// if particle is dead
 					it = _particles.erase(it);
 					particle->release();
                     end = _particles.end();
+                    // need to reinitialize both "end" and "it" // 
+                    it = _particles.begin()+num;
 				} else {
 					num++;
 					particle->doVerlet();
