@@ -535,18 +535,16 @@ namespace MSA {
             typename vector<ParticleT<T>*>::iterator it = _particles.begin();
             // i cant delete and add particles in the same loop if I dont't fix end in the beginning
             // to be able to still delete particles later I only update end if I delete one 
-            typename vector<ParticleT<T>*>::iterator end = _particles.end();
+//            typename vector<ParticleT<T>*>::iterator end = _particles.end();
             
-			while( it != end ) {
+			while( it != _particles.end() ) {
 //			for ( typename vector<ParticleT<T>*>::iterator it = _particles.begin(); it != _particles.end(); it++) {
             
                 ParticleT<T>* particle = *it;
 				if(particle->_isDead) {							// if particle is dead
 					it = _particles.erase(it);
 					particle->release();
-                    end = _particles.end();
-                    // need to reinitialize both "end" and "it" // 
-                    it = _particles.begin()+num;
+//                    end = _particles.end();
 				} else {
 					num++;
 					particle->doVerlet();
