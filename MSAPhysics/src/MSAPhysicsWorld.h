@@ -545,7 +545,7 @@ namespace MSA {
 					num++;
 					particle->doVerlet();
 					particle->update();
-					applyUpdaters(particle);
+					this->applyUpdaters(particle);
 					if(params.doWorldEdges) {
 						//				if(particle->isFree()) 
 						particle->checkWorldEdges();
