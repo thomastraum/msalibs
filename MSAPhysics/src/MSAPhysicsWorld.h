@@ -533,12 +533,8 @@ namespace MSA {
 		void WorldT<T>::updateParticles() {
 			int num = 0;
             typename vector<ParticleT<T>*>::iterator it = _particles.begin();
-            // i cant delete and add particles in the same loop if I dont't fix end in the beginning
-            // to be able to still delete particles later I only update end if I delete one 
-//            typename vector<ParticleT<T>*>::iterator end = _particles.end();
             
 			while( it != _particles.end() ) {
-//			for ( typename vector<ParticleT<T>*>::iterator it = _particles.begin(); it != _particles.end(); it++) {
             
                 ParticleT<T>* particle = *it;
 				if(particle->_isDead) {							// if particle is dead
