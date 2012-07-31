@@ -19,7 +19,7 @@
  You do not need to worry about whether anyone else is using the data or not, 
  the reference count will take care of that.
  
- Never use 'delete myObj', only use 'myObj->release();
+ Never use 'delete myObj', only use 'myObj->release(); */
  
  /***********************************************************************
  
